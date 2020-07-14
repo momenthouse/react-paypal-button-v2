@@ -105,14 +105,17 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
   }
 
   shouldComponentUpdate(nextProps) {
+    const { loadedScript } = this.state;
     console.log('nextProps.currency', nextProps.currency, this.props.currency);
     if (nextProps.currency && this.props.currency && nextProps.currency != this.props.currency) {
-      console.log('nextProps.currency', nextProps.currency);
-      console.log('this.props.currency', this.props.currency);
+      if (loadedScript) {
+        loadedScript.remove();
+        delete window['zoid'];
+        delete window['paypal'];
+      }
       this.addPaypalSdk();
-      return true;
     }
-    return false;
+    return true;
   }
 
   createOrder(data: any, actions: any) {
@@ -190,9 +193,6 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     console.log('options.clientId', options.clientId);
 
     console.log('loadedScript', loadedScript);
-    if (loadedScript) {
-      loadedScript.remove();
-    }
     const queryParams: string[] = [];
 
     // replacing camelCase with dashes
