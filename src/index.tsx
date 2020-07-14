@@ -170,7 +170,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
   }
 
   private addPaypalSdk() {
-    const { options, onButtonReady } = this.props;
+    const { currency, options, onButtonReady } = this.props;
     const queryParams: string[] = [];
 
     // replacing camelCase with dashes
@@ -183,6 +183,8 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     });
 
     queryParams.push(`currency=${currency}`);
+
+    console.log('queryParams', queryParams);
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
