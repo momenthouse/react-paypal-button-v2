@@ -25,6 +25,7 @@ export interface PayPalButtonProps {
 
 export interface PayPalButtonState {
   isSdkReady: boolean;
+  loadedScript: HTMLScriptElement;
 }
 
 export interface PaypalOptions {
@@ -153,6 +154,8 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     if (!isSdkReady && (typeof window === 'undefined' || window.paypal === undefined)) {
       return null;
     }
+    console.log('render');
+    console.log('options.clientId', options.clientId);
 
     const Button = window.paypal.Buttons.driver('react', {
       React,
@@ -199,6 +202,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     });
 
     queryParams.push(`currency=${currency}`);
+    console.log('queryParams', queryParams);
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
