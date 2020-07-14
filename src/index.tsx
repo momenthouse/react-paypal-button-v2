@@ -103,6 +103,13 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.currency != nextState.currency) {
+      console.log('addPaypalSdk', this.addPaypalSdk);
+    }
+    return nextProps.currency != nextState.currency;
+  }
+
   createOrder(data: any, actions: any) {
     const { currency, options, amount, shippingPreference } = this.props;
 
@@ -171,6 +178,12 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
   private addPaypalSdk() {
     const { currency, options, onButtonReady } = this.props;
+    const { loadedScript } = this.state;
+
+    console.log('loadedScript', loadedScript);
+    if (loadedScript) {
+      loadedScript.remove();
+    }
     const queryParams: string[] = [];
 
     // replacing camelCase with dashes
@@ -202,6 +215,8 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     };
 
     document.body.appendChild(script);
+
+    this.setState({ loadedScript: script });
   }
 }
 
