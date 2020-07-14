@@ -106,7 +106,6 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
   shouldComponentUpdate(nextProps) {
     const { loadedScript } = this.state;
-    console.log('nextProps.currency', nextProps.currency, this.props.currency);
     if (nextProps.currency && this.props.currency && nextProps.currency != this.props.currency) {
       //   if (loadedScript) {
       //     loadedScript.remove();
@@ -154,14 +153,10 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
   render() {
     const { amount, onSuccess, createOrder, createSubscription, onApprove, style } = this.props;
     const { isSdkReady } = this.state;
-    console.log('isSdkReady', isSdkReady);
 
     if (typeof window === 'undefined' || window.paypal === undefined) {
-      console.log('isSdkReady', isSdkReady);
       return null;
     }
-
-    console.log('render', window['paypal']);
 
     const Button = window.paypal.Buttons.driver('react', {
       React,
@@ -194,7 +189,6 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
     console.log('options.clientId', options.clientId);
 
-    console.log('loadedScript', loadedScript);
     const queryParams: string[] = [];
 
     // replacing camelCase with dashes
@@ -207,7 +201,6 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     });
 
     queryParams.push(`currency=${currency}`);
-    console.log('queryParams', queryParams);
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -225,7 +218,6 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     };
 
     document.body.appendChild(script);
-    console.log('script', script);
 
     this.setState({ loadedScript: script });
   }
