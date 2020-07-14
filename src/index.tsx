@@ -108,8 +108,9 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
       console.log('nextProps.currency', nextProps.currency);
       console.log('nextState.currency', nextState.currency);
       this.addPaypalSdk();
+      return true;
     }
-    return nextProps.currency != nextState.currency;
+    return false;
   }
 
   createOrder(data: any, actions: any) {
