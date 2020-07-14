@@ -6,14 +6,8 @@
     "declaration": true,
     "outDir": "./dist",
     "strict": false,
-    "esModuleInterop": true,
-
+    "esModuleInterop": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/tests/**/*.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/tests/**/*.ts"]
 }
