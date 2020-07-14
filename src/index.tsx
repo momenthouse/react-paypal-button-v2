@@ -105,7 +105,9 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.currency != nextState.currency) {
-      console.log('addPaypalSdk', this.addPaypalSdk);
+      console.log('nextProps.currency', nextProps.currency);
+      console.log('nextState.currency', nextState.currency);
+      this.addPaypalSdk();
     }
     return nextProps.currency != nextState.currency;
   }
