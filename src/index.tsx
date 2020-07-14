@@ -105,6 +105,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log('nextProps.currency', nextProps.currency, nextState.currency);
     if (nextProps.currency && nextState.currency && nextProps.currency != nextState.currency) {
       console.log('nextProps.currency', nextProps.currency);
       console.log('nextState.currency', nextState.currency);
@@ -154,8 +155,8 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     if (!isSdkReady && (typeof window === 'undefined' || window.paypal === undefined)) {
       return null;
     }
+
     console.log('render');
-    console.log('options.clientId', options.clientId);
 
     const Button = window.paypal.Buttons.driver('react', {
       React,
@@ -185,6 +186,8 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
   private addPaypalSdk() {
     const { currency, options, onButtonReady } = this.props;
     const { loadedScript } = this.state;
+
+    console.log('options.clientId', options.clientId);
 
     console.log('loadedScript', loadedScript);
     if (loadedScript) {
@@ -220,6 +223,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     };
 
     document.body.appendChild(script);
+    console.log('script', script);
 
     this.setState({ loadedScript: script });
   }
