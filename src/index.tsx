@@ -197,8 +197,6 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
     queryParams.push(`currency=${currency}`);
 
-    console.log('queryParams', queryParams);
-
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = `https://www.paypal.com/sdk/js?${queryParams.join('&')}`;
