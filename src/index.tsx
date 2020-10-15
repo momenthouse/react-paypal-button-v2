@@ -78,7 +78,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     style: {},
     options: {
       clientId: 'sb',
-      currency: 'USD',
+      currency: '',
     },
     shippingPreference: 'GET_FROM_FILE',
   };
