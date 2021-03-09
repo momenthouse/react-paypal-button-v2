@@ -117,7 +117,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
       //     delete window['zoid'];
       //     delete window['paypal'];
       //   }
-      this.addPaypalSdk();
+      this.addPaypalSdk(nextProps.currency);
     }
     return true;
   }
@@ -188,7 +188,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     );
   }
 
-  private addPaypalSdk() {
+  private addPaypalSdk(currency?) {
     const { options, onButtonReady } = this.props;
     const { loadedScript } = this.state;
 
@@ -196,7 +196,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = this.getScriptSrc();
+    script.src = this.getScriptSrc(currency);
     script.async = true;
     script.onload = () => {
       this.setState({ isSdkReady: true });
@@ -214,8 +214,12 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     this.setState({ loadedScript: script });
   }
 
-  private getScriptSrc() {
-    const { currency, options } = this.props;
+  private getScriptSrc(currency?) {
+    const { options } = this.props;
+
+    if (!currency) {
+      currency = this.props.currency;
+    }
 
     const queryParams: string[] = [];
 
