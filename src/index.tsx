@@ -88,6 +88,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
 
     this.state = {
       isSdkReady: false,
+      loadedScript: null,
     };
   }
 
@@ -100,7 +101,11 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
       window.paypal !== undefined &&
       this.props.onButtonReady
     ) {
-      this.props.onButtonReady();
+      if (!document.querySelector(`script[src='${this.getScriptSrc()}']`)) {
+        this.addPaypalSdk();
+      } else {
+        this.props.onButtonReady();
+      }
     }
   }
 
@@ -112,7 +117,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
       //     delete window['zoid'];
       //     delete window['paypal'];
       //   }
-      this.addPaypalSdk();
+      this.addPaypalSdk(nextProps.currency);
     }
     return true;
   }
@@ -183,28 +188,15 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     );
   }
 
-  private addPaypalSdk() {
-    const { currency, options, onButtonReady } = this.props;
+  private addPaypalSdk(currency?) {
+    const { options, onButtonReady } = this.props;
     const { loadedScript } = this.state;
 
     console.log('options.clientId', options.clientId);
 
-    const queryParams: string[] = [];
-
-    // replacing camelCase with dashes
-    Object.keys(options).forEach((k) => {
-      const name = k
-        .split(/(?=[A-Z])/)
-        .join('-')
-        .toLowerCase();
-      queryParams.push(`${name}=${options[k]}`);
-    });
-
-    queryParams.push(`currency=${currency}`);
-
     const script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = `https://www.paypal.com/sdk/js?${queryParams.join('&')}`;
+    script.src = this.getScriptSrc(currency);
     script.async = true;
     script.onload = () => {
       this.setState({ isSdkReady: true });
@@ -220,6 +212,29 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     document.body.appendChild(script);
 
     this.setState({ loadedScript: script });
+  }
+
+  private getScriptSrc(currency?) {
+    const { options } = this.props;
+
+    if (!currency) {
+      currency = this.props.currency;
+    }
+
+    const queryParams: string[] = [];
+
+    // replacing camelCase with dashes
+    Object.keys(options).forEach((k) => {
+      const name = k
+        .split(/(?=[A-Z])/)
+        .join('-')
+        .toLowerCase();
+      queryParams.push(`${name}=${options[k]}`);
+    });
+
+    queryParams.push(`currency=${currency}`);
+
+    return `https://www.paypal.com/sdk/js?${queryParams.join('&')}`;
   }
 }
 
