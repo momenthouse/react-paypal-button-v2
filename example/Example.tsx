@@ -1,37 +1,66 @@
-import React, { Component } from "react";
-import { PayPalButton } from "../lib/index";
+import React, { Component } from 'react';
+import { PayPalButton } from '../src/index';
 
 class Example extends Component<any, any> {
-    constructor(props: any) {
-        super(props);
-        this.state = { showLoading: true };
-    }
+  constructor(props: any) {
+    super(props);
+    this.state = { showLoading: true };
+  }
 
-    render() {
-        const buttonStyles = {
-            textAlign: "center",
-            padding: "1rem",
-            margin: "1rem"
-        }
+  render() {
+    const buttonStyles = {
+      textAlign: 'center',
+      padding: '1rem',
+      margin: '1rem',
+    };
 
-        const { showLoading } = this.state;
+    const { showLoading } = this.state;
 
-        return (
-            <div style={buttonStyles as any}>
-                <h3>Try me out</h3>
+    const payPalCallback = () => {
+      console.log('paypal payment init');
+    };
+    const selectedCurrency = 'GBP';
+    const total = 10.45;
+    const statementDescription = 'statementDescription';
+    return (
+      <div style={buttonStyles as any}>
+        <h3>Try me out</h3>
 
-                {showLoading ? <span>Loading Button...</span> : null}
+        {showLoading ? <span>Loading Button...</span> : null}
 
-                <PayPalButton
-                    amount="0.01"
-                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                    onSuccess={(details) => {
-                        return alert("Transaction completed by " + details.payer.name.given_name)
-                    }}
-                    onButtonReady={() => this.setState({ showLoading: false })}
-                />
+        <PayPalButton
+          currency={selectedCurrency}
+          shippingPreference={'GET_FROM_FILE'}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: {
+                    currency_code: selectedCurrency,
+                    value: total,
+                  },
+                  description: statementDescription,
+                },
+              ],
+              application_context: {
+                shipping_preference: 'GET_FROM_FILE',
+              },
+            });
+          }}
+          onApprove={payPalCallback}
+          onError={(err) => {}}
+          style={{ color: 'black' }}
+          options={{
+            clientId: 'AcQxNz65QEbEh9UzmHSPRCFL0TfWRdA3_hE-cvtuouE6GwCKbzq-SvtQB4u85FLwaf0fTGUeCtLRCYtG',
+            disableFunding: 'card,credit,bancontact',
+          }}
+          onButtonReady={() => {
+            console.log('PayPal init ', selectedCurrency);
+            this.setState({ showLoading: false });
+          }}
+        />
 
-                {/* <PayPayButton
+        {/* <PayPayButton
                     createOrder={(data, actions) => {
                         return actions.order.create({
                             purchase_units: [{
@@ -54,7 +83,7 @@ class Example extends Component<any, any> {
                     onButtonReady={() => this.setState({ showLoading: false })}
                 /> */}
 
-                {/* <PayPalButton
+        {/* <PayPalButton
                     createSubscription={(data, actions) => {
                         return actions.subscription.create({
                             plan_id: "P-XXXXXXXXXXXXXXXXXXXXXXXX",
@@ -68,9 +97,9 @@ class Example extends Component<any, any> {
                     options={{clientId: "sb", vault: true}}
                     onButtonReady={() => this.setState({ showLoading: false })}
                 /> */}
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
-export { Example }
+export { Example };

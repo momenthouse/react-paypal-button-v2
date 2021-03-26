@@ -8,13 +8,14 @@
 
 :information_source: This PayPal Checkout integration uses the PayPal JavaScript SDK.  Starting at the beginning of February 2019, all new users must use PayPal's version 2 integration as version 1 is now depreciated.
 
-<br/>
-<br/>
-<br/>
 <a href="https://luehangs.site"><img src="https://luehangs.site/images/lh-blog-strip.jpg" alt="LueHsoft LueH LABS Lue Hang luehang"/></a>
-<br/>
-<br/>
-<br/>
+
+# Moment House README
+### How to Develop locally?
+Run `nvm use` to make sure you're on the correct npm version and then run `npm link` on this repo. Then go to your frontend repo and then run `npm link react-paypal-button-v2`. This should link your packages locally at a common location:
+`/Users/bansalshray/.nvm/versions/node/v14.2.0/lib/node_modules/react-paypal-button-v2 -> /Users/bansalshray/Desktop/momenthouse/react-paypal-button-v2`
+
+# PayPal README
 
 # Index
 
@@ -31,14 +32,7 @@
 ### 11. [Contribute](#large_blue_diamond-contribute)
 ### 12. [License](#large_blue_diamond-license)
 
-<br/>
-<br/>
-<br/>
-
 ---
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Prerequisites
 
@@ -46,17 +40,11 @@ To use PayPal's Smart Payment Buttons in prodution, you must have a PayPal Busin
 
 Once you have your account set up, you will have 2 different sets of credentials for sandbox mode and production mode. You will also be able to create sandbox business and customer accounts to be tested on.
 
-<br/>
-<br/>
-<br/>
 <a href="https://luehangs.site/marketplace/product/RN%20Posting%20Demo%20App%20Kit"><img src="https://luehangs.site/images/lh-mobile-strip.jpg" alt="LueHsoft LueH LABS Lue Hang luehang"/></a>
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Install
 
-Type in the following to the command line to install the dependency. 
+Type in the following to the command line to install the dependency.
 
 ```sh
 $ npm install react-paypal-button-v2 --save
@@ -68,14 +56,8 @@ or
 $ yarn add react-paypal-button-v2
 ```
 
-<br/>
-<br/>
-<br/>
 
 ---
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Usage Example
 
@@ -113,14 +95,8 @@ For alternative usage, go to the [Alternative Usage Example Section](#large_blue
 
 To create subscriptions, go to the [Subscriptions Example Section](#subscription-example-usage).
 
-<br/>
-<br/>
-<br/>
 
 ---
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Production Example
 
@@ -161,17 +137,12 @@ For alternative usage, go to the [Alternative Production Example Section](#large
 
 To create subscriptions, go to the [Subscriptions Example Section](#subscription-example-usage).
 
-<br/>
-<br/>
 <a href="https://luehangs.site/marketplace/product/RN%20Posting%20Demo%20App%20Kit"><img src="https://luehangs.site/images/lh-mobile-strip.jpg" alt="LueHsoft LueH LABS Lue Hang luehang"/></a>
-<br/>
-<br/>
 
 ## :large_blue_diamond: API
 
 ``<PayPalButton />`` component accepts the following props...
 
-<br/>
 
 # :large_blue_diamond: Props
 
@@ -194,14 +165,8 @@ To create subscriptions, go to the [Subscriptions Example Section](#subscription
 
 :information_source: Learn more about the integration proccess along with more props and advance use cases starting at [PayPal's docs](https://developer.paypal.com/docs/checkout/integrate/).
 
-<br/>
-<br/>
-<br/>
 
 ---
-<br/>
-<br/>
-<br/>
 
 ## :small_blue_diamond: `options` Prop Fieldnames or Parameters
 
@@ -225,17 +190,10 @@ Option | Description | Type | Default
 
 :information_source: To see a detail and complete list of available parameters and values, go to [PayPal's Customization page](https://developer.paypal.com/docs/checkout/reference/customize-sdk/).
 
-<br/>
-<br/>
-<br/>
 <a href="https://luehangs.site/marketplace/product/RN%20Posting%20Demo%20App%20Kit"><img src="https://luehangs.site/images/lh-mobile-strip.jpg" alt="LueHsoft LueH LABS Lue Hang luehang"/></a>
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Alternative Usage Example
 
-<br/>
 
 ### Usage Example 1
 
@@ -280,7 +238,6 @@ export default class Example Component {
 }
 ```
 
-<br/>
 
 ### Usage Example 2
 
@@ -299,7 +256,6 @@ Option | Description | Type | Default
 
 To see a detail and complete list of available parameters and values, go to [PayPal's Customization page](https://developer.paypal.com/docs/checkout/reference/customize-sdk/).
 
-<br/>
 
 ```javascript
 import { PayPalButton } from "react-paypal-button-v2";
@@ -327,13 +283,11 @@ export default class Example Component {
 }
 ```
 
-<br/>
 
 ### Subscription Example Usage
 
 To create subscriptions you must first [create a product](https://developer.paypal.com/docs/subscriptions/integrate/#2-create-a-product) and [create a plan](https://developer.paypal.com/docs/subscriptions/integrate/#3-create-a-plan) using the PayPal REST API.
 
-<br/>
 
 ```javascript
 import { PayPalButton } from "react-paypal-button-v2";
@@ -370,14 +324,8 @@ export default class Example Component {
 }
 ```
 
-<br/>
-<br/>
-<br/>
 
 ---
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Alternative Production Example
 
@@ -396,7 +344,6 @@ Option | Description | Type | Default
 
 To see a detail and complete list of available parameters and values, go to [PayPal's Customization page](https://developer.paypal.com/docs/checkout/reference/customize-sdk/).
 
-<br/>
 
 ```javascript
 import { PayPalButton } from "react-paypal-button-v2";
@@ -424,13 +371,7 @@ export default class Example Component {
 }
 ```
 
-<br/>
-<br/>
-<br/>
 <a href="https://luehangs.site/marketplace/product/RN%20Posting%20Demo%20App%20Kit"><img src="https://luehangs.site/images/lh-mobile-strip.jpg" alt="LueHsoft LueH LABS Lue Hang luehang"/></a>
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Example Project
 
@@ -439,7 +380,6 @@ Perform steps 1-2 to run locally:
 1. [Clone the Repo](#1-clone-the-repo)
 2. [Install and Run](#2-install-and-run)
 
-<br/>
 
 ### :small_blue_diamond: 1. Clone the Repo
 
@@ -449,7 +389,6 @@ Perform steps 1-2 to run locally:
 $ git clone https://github.com/Luehang/react-paypal-button-v2.git react-paypal-button-v2
 ```
 
-<br/>
 
 ### :small_blue_diamond: 2. Install and Run
 
@@ -459,32 +398,19 @@ $ npm install
 $ npm run start
 ```
 
-<br/>
-<br/>
-<br/>
 <a href="https://luehangs.site/marketplace/product/RN%20Posting%20Demo%20App%20Kit"><img src="https://luehangs.site/images/lh-mobile-strip.jpg" alt="LueHsoft LueH LABS Lue Hang luehang"/></a>
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: Contribute
 
 [Pull requests](https://github.com/Luehang/react-paypal-button-v2/pulls) are welcomed.
 
-<br/>
 
 ### :small_blue_diamond: Beginners
 
 Not sure where to start, or a beginner? Take a look at the [issues page](https://github.com/Luehang/react-paypal-button-v2/issues).
 
-<br/>
-<br/>
-<br/>
 
 ---
-<br/>
-<br/>
-<br/>
 
 ## :large_blue_diamond: License
 

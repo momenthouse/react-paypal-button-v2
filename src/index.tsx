@@ -90,9 +90,11 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
       isSdkReady: false,
       loadedScript: null,
     };
+    console.log('22222', 22222);
   }
 
   componentDidMount() {
+    console.log('1111', 1111);
     if (typeof window !== 'undefined' && window !== undefined && window.paypal === undefined) {
       this.addPaypalSdk();
     } else if (
@@ -192,7 +194,8 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     const { options, onButtonReady } = this.props;
     const { loadedScript } = this.state;
 
-    console.log('options.clientId', options.clientId);
+    console.log('options', options);
+    // console.log('options.clientId', options.clientId);
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
@@ -218,7 +221,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     const { options } = this.props;
 
     if (!currency) {
-      currency = this.props.currency;
+      currency = this.props.currency || 'usd';
     }
 
     const queryParams: string[] = [];
@@ -232,7 +235,9 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
       queryParams.push(`${name}=${options[k]}`);
     });
 
+    console.log('currency', currency);
     queryParams.push(`currency=${currency}`);
+    console.log('queryParams', queryParams);
 
     return `https://www.paypal.com/sdk/js?${queryParams.join('&')}`;
   }
