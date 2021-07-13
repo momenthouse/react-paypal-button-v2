@@ -109,14 +109,16 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
     }
   }
 
-  shouldComponentUpdate(nextProps) {
+  componentWillUnmount() {
     const { loadedScript } = this.state;
+
+    if (loadedScript) {
+      loadedScript.remove();
+    }
+  }
+
+  shouldComponentUpdate(nextProps) {
     if (nextProps.currency && this.props.currency && nextProps.currency != this.props.currency) {
-      //   if (loadedScript) {
-      //     loadedScript.remove();
-      //     delete window['zoid'];
-      //     delete window['paypal'];
-      //   }
       this.addPaypalSdk(nextProps.currency);
     }
     return true;
@@ -189,10 +191,7 @@ class PayPalButton extends React.Component<PayPalButtonProps, PayPalButtonState>
   }
 
   private addPaypalSdk(currency?) {
-    const { options, onButtonReady } = this.props;
-    const { loadedScript } = this.state;
-
-    console.log('options.clientId', options.clientId);
+    const { onButtonReady } = this.props;
 
     const script = document.createElement('script');
     script.type = 'text/javascript';
